@@ -120,7 +120,8 @@ function * documentFilterGet(branch, filters)
     if(filters.where)  filters.where.forEach( where => ref = ref.where(...where))
   }
   const querySnapshot = yield call([ref, ref.get])
-  return querySnapshot.docs.map(doc=>({id: doc.id, data:doc.data()}))
+  const data = doc.data()
+  return querySnapshot.docs.map(doc=>({eid: doc.id, ...data}))
 }
 
 /**
