@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
@@ -223,7 +219,7 @@ function documentAllGet(branch) {
  * * @return {Array} Filtered documents from collection
  */
 function documentFilterGet(branch, filters) {
-  var ref, querySnapshot, data;
+  var ref, querySnapshot;
   return _regenerator2.default.wrap(function documentFilterGet$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
@@ -252,12 +248,11 @@ function documentFilterGet(branch, filters) {
 
         case 4:
           querySnapshot = _context7.sent;
-          data = doc.data();
           return _context7.abrupt('return', querySnapshot.docs.map(function (doc) {
-            return (0, _extends3.default)({ eid: doc.id }, data);
+            return { id: doc.id, data: doc.data() };
           }));
 
-        case 7:
+        case 6:
         case 'end':
           return _context7.stop();
       }
