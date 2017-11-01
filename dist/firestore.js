@@ -8,6 +8,10 @@ var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -147,22 +151,20 @@ function documentUpdate(branch, data) {
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get
  */
 function documentGet(branch, document) {
-  var ref, documentSnapshot;
+  var ref, doc;
   return _regenerator2.default.wrap(function documentGet$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           ref = this._getBranch(branch, 'firestore');
-
-          console.log(ref);
-          _context5.next = 4;
+          _context5.next = 3;
           return (0, _effects.call)([ref, ref.get]);
 
-        case 4:
-          documentSnapshot = _context5.sent;
-          return _context5.abrupt('return', { id: documentSnapshot.id, data: documentSnapshot.data() });
+        case 3:
+          doc = _context5.sent;
+          return _context5.abrupt('return', (0, _extends3.default)({ id: doc.id }, doc.data()));
 
-        case 6:
+        case 5:
         case 'end':
           return _context5.stop();
       }
@@ -191,7 +193,7 @@ function documentAllGet(branch) {
         case 3:
           querySnapshot = _context6.sent;
           return _context6.abrupt('return', querySnapshot.docs.map(function (doc) {
-            return { id: doc.id, data: doc.data() };
+            return (0, _extends3.default)({ id: doc.id }, doc.data());
           }));
 
         case 5:
@@ -249,7 +251,7 @@ function documentFilterGet(branch, filters) {
         case 4:
           querySnapshot = _context7.sent;
           return _context7.abrupt('return', querySnapshot.docs.map(function (doc) {
-            return { id: doc.id, data: doc.data() };
+            return (0, _extends3.default)({ id: doc.id }, doc.data());
           }));
 
         case 6:

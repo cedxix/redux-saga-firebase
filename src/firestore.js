@@ -68,9 +68,8 @@ function * documentUpdate(branch, data)
 function * documentGet(branch, document)
 {
   const ref = this._getBranch(branch, 'firestore')
-  console.log(ref)
-  const documentSnapshot = yield call([ref, ref.get])
-  return {id: documentSnapshot.id, data:documentSnapshot.data()}
+  const doc = yield call([ref, ref.get])
+  return {id: doc.id, ...doc.data()}
 }
 
 /**
@@ -85,7 +84,7 @@ function * documentAllGet(branch)
 {
   const ref = this._getBranch(branch, 'firestore')
   const querySnapshot = yield call([ref, ref.get])
-  return querySnapshot.docs.map(doc=>({id: doc.id, data:doc.data()}))
+  return querySnapshot.docs.map(doc=>({id: doc.id, ...doc.data()}))
 }
 
 /**
@@ -120,7 +119,8 @@ function * documentFilterGet(branch, filters)
     if(filters.where)  filters.where.forEach( where => ref = ref.where(...where))
   }
   const querySnapshot = yield call([ref, ref.get])
-  return querySnapshot.docs.map(doc=>({id: doc.id, data:doc.data() }))
+  
+  return querySnapshot.docs.map(doc=>({id: doc.id, ...doc.data() }))
 }
 
 /**
